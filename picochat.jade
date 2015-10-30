@@ -1,0 +1,29 @@
+head
+  title Picochat
+
+body
+  +loginButtons
+  +chatbox
+
+template(name="chatbox")
+  if user
+    .row
+      form#message
+        input#text(type="text" placeholder="message")
+        button send
+      form#room
+        input#roomName(type="text" placeholder="room name" value="general")
+        button join
+    div#messages
+      if noMessages
+        | No messages in this Room
+      else
+        each messages
+          +message
+
+template(name="message")
+  div.message
+    span.username #{username}
+    span.text #{text}
+    span.when #{ago}
+
